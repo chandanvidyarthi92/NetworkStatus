@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.CellInfoGsm;
@@ -18,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,66 +31,24 @@ public class MainActivity extends Activity {
     private SignalStrength      signalStrength;
     private TelephonyManager    telephonyManager;
     TextView textViewNetworkstate;
-    private final static String LTE_TAG             = "LTE_Tag";
+    private LinearLayout coordinatorLayout;
+    private final static String LTE_TAG = "LTE_Tag";
     private final static String LTE_SIGNAL_STRENGTH = "getLteSignalStrength";
 //fasdf
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        coordinatorLayout = (LinearLayout) findViewById(R.id.cord);
          textViewNetworkstate= (TextView) findViewById(R.id.networkstate);
         Button btnCheck = (Button) findViewById(R.id.check);
     btnCheck.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if(haveNetworkConnection()=='W')
-            {
-                //fdasasdfasf
 
-                /*Snackbar snackbar = Snackbar
-                        .make(coordinatorLayout, "Welcome to AndroidHive", Snackbar.LENGTH_LONG);
+            Snackbar snackbar1 =Snackbar.make(coordinatorLayout,"fasdf0",Snackbar.LENGTH_LONG);
 
-                snackbar.show();*/
-                WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
-                int linkSpeed = wifiManager.getConnectionInfo().getRssi();
-                if(linkSpeed<-70)
-                {
-                    textViewNetworkstate.setText("Weak Signal");
-                    textViewNetworkstate.setHighlightColor(Color.parseColor("#FF0000"));
-                }
-                else if(linkSpeed>-50)
-                {
-                    textViewNetworkstate.setHighlightColor(Color.parseColor("#FF0000"));
-                    textViewNetworkstate.setText("Exvellent");
-                }
-                else
-                    textViewNetworkstate.setText("Good");
-                Toast.makeText(getApplicationContext(),"wrifi"+linkSpeed,Toast.LENGTH_LONG).show();
-            }
-            else
-            {
-
-                telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-
-                final PhoneStateListener mListener = new PhoneStateListener()
-                {
-                    @Override
-                    public void onSignalStrengthsChanged(SignalStrength sStrength)
-                    {
-                        signalStrength = sStrength;
-                        textViewNetworkstate.setText(sStrength.toString());
-
-                        Toast.makeText(getApplicationContext(),"cellular"+sStrength,Toast.LENGTH_LONG).show();
-
-                        getLTEsignalStrength();
-                    }
-                };
-
-                // Register the listener for the telephony manager
-                telephonyManager.listen(mListener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
-
-
-            }
+            snackbar1.show();
         }
     });
     }
